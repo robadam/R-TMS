@@ -12,6 +12,12 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Kalendarz", "Index", "Schedule")</li>
             </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @Html.ActionLink("Zaloguj", "Login", "Schedule", new { area = ""}, new { @class = "navbar-brand" })
+            </ul>
         </div>
     </div>
 </div>
+
+
