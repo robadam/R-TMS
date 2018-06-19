@@ -17,6 +17,9 @@ namespace Rehau_TMS.Controllers
 {
     public class AccountController : Controller
     {
+
+        ApplicationDbContext _context = new ApplicationDbContext();
+
         //User menager starts here
         private ApplicationUserManager _userManager;
 
@@ -87,6 +90,10 @@ namespace Rehau_TMS.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+            var allRoles = (new ApplicationDbContext()).Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+
+            ViewBag.Roles = allRoles;
             return View();
         }
 
@@ -99,10 +106,12 @@ namespace Rehau_TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Login, Email = model.Login };
+                var user = new ApplicationUser() { UserName = model.Login, Name = model.Name, Surname = model.Surname};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    UserManager.AddToRole(user.Id, model.RoleName);
                     await SignInAsync(user);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -138,7 +147,7 @@ namespace Rehau_TMS.Controllers
         private async Task SignInAsync(ApplicationUser user)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() , await user.GenerateUserIdentityAsync(UserManager));
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, await user.GenerateUserIdentityAsync(UserManager));
         }
 
 

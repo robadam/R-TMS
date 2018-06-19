@@ -26,6 +26,19 @@ namespace Rehau_TMS.ViewModels
         public string Login { get; set; }
 
         [Required]
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Nazwisko")]
+        public string Surname { get; set; }
+
+        public string FullName
+        {
+            get { return Name + " " + Surname; }
+        }
+
+        [Required]
         [StringLength(100, ErrorMessage = "{0} musi zawierać minimum {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
@@ -35,6 +48,11 @@ namespace Rehau_TMS.ViewModels
         [Display(Name = "Powtórz hasło")]
         [Compare("Password", ErrorMessage = "Hasła nie są zgodne.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name= "Rodzaj użytkownika")]
+        public string RoleName { get; set; }
+
     }
 
     public class ResetPasswordViewModel

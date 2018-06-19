@@ -363,9 +363,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Migrations\201806171439213_initial.cs" />
     <Compile Include="Migrations\201806171439213_initial.Designer.cs">
       <DependentUpon>201806171439213_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806181622507_AddLoginNameSurnamePropForUser.cs" />
+    <Compile Include="Migrations\201806181622507_AddLoginNameSurnamePropForUser.Designer.cs">
+      <DependentUpon>201806181622507_AddLoginNameSurnamePropForUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806181645044_DropLoginPropForUser.cs" />
+    <Compile Include="Migrations\201806181645044_DropLoginPropForUser.Designer.cs">
+      <DependentUpon>201806181645044_DropLoginPropForUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -418,6 +427,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -438,6 +450,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806171439213_initial.resx">
       <DependentUpon>201806171439213_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181622507_AddLoginNameSurnamePropForUser.resx">
+      <DependentUpon>201806181622507_AddLoginNameSurnamePropForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181645044_DropLoginPropForUser.resx">
+      <DependentUpon>201806181645044_DropLoginPropForUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
