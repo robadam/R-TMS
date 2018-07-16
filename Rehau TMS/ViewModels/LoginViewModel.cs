@@ -52,6 +52,9 @@ namespace Rehau_TMS.ViewModels
         [Required]
         [Display(Name= "Rodzaj użytkownika")]
         public string RoleName { get; set; }
+        
+        [Display(Name= "Status")]
+        public bool IsActive { get; set; }
 
     }
 
@@ -82,6 +85,7 @@ namespace Rehau_TMS.ViewModels
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Role { get; set; }
+        public bool IsActive { get; set; }
         public string FullName
         {
             get { return Name + " " + Surname; }

@@ -64,6 +64,7 @@ namespace Rehau_TMS.Controllers
                                       Username = user.UserName,
                                       Name = user.Name,
                                       Surname = user.Surname,
+                                      IsActive = user.IsActive,
                                       RoleNames = (from userRole in user.Roles
                                                    join role in _context.Roles on userRole.RoleId
                                                    equals role.Id
@@ -75,6 +76,7 @@ namespace Rehau_TMS.Controllers
                                       Username = p.Username,
                                       Name = p.Name,
                                       Surname = p.Surname,
+                                      IsActive = p.IsActive,
                                       Role = string.Join(",", p.RoleNames)
                                   });
 
@@ -96,18 +98,26 @@ namespace Rehau_TMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.Login, model.Password);
-                if (user != null)
+
+                if (user != null && user.IsActive)
                 {
                     await SignInAsync(user);
                     return RedirectToLocal(returnUrl);
+                }
+                else if (user != null && !user.IsActive)
+                {
+                    ModelState.AddModelError("", "Użytkownik jest zablokowany.");
                 }
                 else
                 {
                     ModelState.AddModelError("", "Nieprawidłowa nazwa użytkownika lub hasło.");
                 }
+                
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -134,7 +144,7 @@ namespace Rehau_TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Login, Name = model.Name, Surname = model.Surname};
+                var user = new ApplicationUser() { UserName = model.Login, Name = model.Name, Surname = model.Surname, IsActive = true};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

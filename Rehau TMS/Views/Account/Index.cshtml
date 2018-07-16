@@ -20,6 +20,7 @@ else
                 <th>Imię i nazwisko</th>
                 <th>Login</th>
                 <th>Rola</th>
+                <th>Status</th>
             </tr>
         </thead>
 
@@ -31,6 +32,7 @@ else
                     <td>@user.FullName</td>
                     <td>@user.Username</td>
                     <td>@user.Role</td>
+                    <td>@(user.IsActive?"Aktywny":"Zablokowany")</td>
                 </tr>
             }
 

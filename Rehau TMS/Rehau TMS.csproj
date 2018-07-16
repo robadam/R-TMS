@@ -376,6 +376,10 @@
     <Compile Include="Migrations\201806181645044_DropLoginPropForUser.Designer.cs">
       <DependentUpon>201806181645044_DropLoginPropForUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.cs" />
+    <Compile Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.Designer.cs">
+      <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Startup.cs" />
@@ -457,6 +461,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806181645044_DropLoginPropForUser.resx">
       <DependentUpon>201806181645044_DropLoginPropForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.resx">
+      <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
