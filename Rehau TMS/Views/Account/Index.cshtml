@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Rehau_TMS.ViewModels.UserListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista użytkowników</h2>
+
+@if (!Model.Any())
+{
+    <p>Brak użytkowniów</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>Login</th>
+                <th>Rola</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Username</td>
+                    <td>@user.Role</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

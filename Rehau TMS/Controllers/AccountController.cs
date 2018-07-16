@@ -54,6 +54,34 @@ namespace Rehau_TMS.Controllers
         //User menager End
 
 
+
+        public ActionResult Index()
+        {
+            var userslist = (from user in _context.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Name = user.Name,
+                                      Surname = user.Surname,
+                                      RoleNames = (from userRole in user.Roles
+                                                   join role in _context.Roles on userRole.RoleId
+                                                   equals role.Id
+                                                   select role.Name).ToList()
+                                  }).ToList().Select(p => new UserListViewModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      Username = p.Username,
+                                      Name = p.Name,
+                                      Surname = p.Surname,
+                                      Role = string.Join(",", p.RoleNames)
+                                  });
+
+
+            return View(userslist);
+        }
+
         // GET: Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)

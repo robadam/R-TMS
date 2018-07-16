@@ -74,4 +74,18 @@ namespace Rehau_TMS.ViewModels
 
         public string Code { get; set; }
     }
+
+    public class UserListViewModel
+    {
+        public string UserId { get; set; }
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Role { get; set; }
+        public string FullName
+        {
+            get { return Name + " " + Surname; }
+        }
+
+    }
 }
