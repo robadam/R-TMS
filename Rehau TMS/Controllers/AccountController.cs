@@ -169,6 +169,56 @@ namespace Rehau_TMS.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(string Id)
+        {
+            ApplicationUser appUser = new ApplicationUser();
+            appUser = UserManager.FindById(Id);
+            string userRoles = UserManager.GetRoles(appUser.Id).FirstOrDefault();
+            EditUserViewModel user = new EditUserViewModel();
+            user.UserId = appUser.Id;
+            user.Login = appUser.UserName;
+            user.Name = appUser.Name;
+            user.Surname = appUser.Surname;
+            user.IsActive = appUser.IsActive;
+            user.RoleName = userRoles;
+
+            var allRoles = (new ApplicationDbContext()).Roles.Where(r => r.Name != "Admin").OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = allRoles;
+
+            return View(user);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(store);
+            var currentUser = manager.FindByName(model.Login);
+            var oldRoleId = currentUser.Roles.SingleOrDefault().RoleId;
+            var oldRoleName = _context.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+            currentUser.Name = model.Name;
+            currentUser.Surname = model.Surname;
+            currentUser.IsActive = model.IsActive;
+            await manager.UpdateAsync(currentUser);
+
+            if (oldRoleName != model.RoleName)
+            {
+                manager.RemoveFromRole(currentUser.Id, oldRoleName);
+                manager.AddToRole(currentUser.Id, model.RoleName);
+            }
+
+            var ctx = store.Context;
+            ctx.SaveChanges();
+            return RedirectToAction("Index", "Account");
+        }
+
+
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]

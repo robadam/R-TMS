@@ -27,8 +27,7 @@ namespace Rehau_TMS
 
             // Creating default role and user for admin  
             if (!roleManager.RoleExists("Admin"))
-            {
-                // first we create Admin rool   
+            {  
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 roleManager.Create(role);
