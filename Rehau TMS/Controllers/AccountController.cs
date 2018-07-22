@@ -57,7 +57,7 @@ namespace Rehau_TMS.Controllers
 
         public ActionResult Index()
         {
-            var userslist = (from user in _context.Users
+            var userslist = (from user in _context.Users where user.Name != "Admin"
                                   select new
                                   {
                                       UserId = user.Id,
