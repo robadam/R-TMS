@@ -129,7 +129,7 @@ namespace Rehau_TMS.Controllers
         public ActionResult Register()
         {
 
-            var allRoles = (new ApplicationDbContext()).Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var allRoles = (new ApplicationDbContext()).Roles.Where(r => r.Name != "Admin").OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
 
             ViewBag.Roles = allRoles;
             return View();
