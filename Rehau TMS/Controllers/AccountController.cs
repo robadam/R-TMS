@@ -150,7 +150,6 @@ namespace Rehau_TMS.Controllers
                 {
 
                     UserManager.AddToRole(user.Id, model.RoleName);
-                    await SignInAsync(user);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -158,7 +157,7 @@ namespace Rehau_TMS.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Schedule");
+                    return RedirectToAction("Index", "Account");
                 }
                 else
                 {
