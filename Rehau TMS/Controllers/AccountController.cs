@@ -218,6 +218,51 @@ namespace Rehau_TMS.Controllers
             return RedirectToAction("Index", "Account");
         }
 
+        // GET: /Account/ChangePassword
+        public ActionResult ChangePassword(string Id)
+        {
+            if (Id == null)
+            {
+                ModelState.AddModelError("", "Nie znaleziono użytkownika");
+            }
+            ResetPasswordViewModel model = new ResetPasswordViewModel();
+            model.UserId = Id;
+            ApplicationUser appuser = new ApplicationUser();
+            appuser = UserManager.FindById(Id);
+            model.Login = appuser.UserName;
+            model.UserId = appuser.Id;
+            return View(model);
+        }
+
+        //
+        // POST: /Account/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(store);
+            var currentUser = manager.FindByName(model.Login);
+            var removePassword = UserManager.RemovePassword(currentUser.Id);
+            if (removePassword.Succeeded)
+            {
+                //Removed Password Success
+                var AddPassword = UserManager.AddPassword(currentUser.Id, model.Password);
+                if (AddPassword.Succeeded)
+                {
+                    return RedirectToAction("Index", "Account");
+                }
+            }
+
+            ModelState.AddModelError("", "Wystąpiły błędy przy zapisie");
+            return View(model);
+        }
+
 
         // POST: /Account/LogOff
         [HttpPost]

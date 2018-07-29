@@ -40,7 +40,7 @@ else
                     <td>@user.Username</td>
                     <td>@user.Role</td>
                     <td>@(user.IsActive ? "Aktywny" : "Zablokowany")</td>
-                    <td>@Html.ActionLink("Edytuj", "Edit", "Account", new { id = user.UserId }, null)</td>
+                    <td>@Html.ActionLink("Edytuj", "Edit", "Account", new { id = user.UserId }, null) | @Html.ActionLink("Zmień hasło", "ChangePassword", "Account", new { Id = user.UserId }, null)</td>
                 </tr>
             }
 
