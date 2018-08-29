@@ -15,6 +15,7 @@ using Rehau_TMS.Models;
 
 namespace Rehau_TMS.Controllers
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class AccountController : Controller
     {
 
@@ -125,7 +126,6 @@ namespace Rehau_TMS.Controllers
         }
 
         // GET: /Account/Register
-        [AllowAnonymous]
         public ActionResult Register()
         {
 
@@ -138,7 +138,6 @@ namespace Rehau_TMS.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -267,6 +266,7 @@ namespace Rehau_TMS.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
