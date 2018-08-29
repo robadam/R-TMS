@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Rehau_TMS.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Moderator")]
     public class RoleController : Controller
     {
         ApplicationDbContext _context = new ApplicationDbContext();
