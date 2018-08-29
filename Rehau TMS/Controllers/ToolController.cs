@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,11 +10,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Rehau_TMS.Controllers
 {
-    public class ScheduleController : Controller
+    [Authorize(Roles = "Admin, Moderator")]
+    public class ToolController : Controller
     {
         ApplicationDbContext _context = new ApplicationDbContext();
 
-        // GET: Schedule
+        // GET: Tool
         public ActionResult Index()
         {
             return View();
@@ -31,6 +30,5 @@ namespace Rehau_TMS.Controllers
         {
             return View();
         }
-
     }
 }

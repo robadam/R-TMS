@@ -363,7 +363,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Migrations\201806171439213_initial.cs" />
     <Compile Include="Migrations\201806171439213_initial.Designer.cs">
       <DependentUpon>201806171439213_initial.cs</DependentUpon>
@@ -437,6 +439,8 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Tool\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

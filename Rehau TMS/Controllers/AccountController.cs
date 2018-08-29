@@ -18,7 +18,6 @@ namespace Rehau_TMS.Controllers
     [Authorize(Roles = "Admin, Moderator")]
     public class AccountController : Controller
     {
-
         ApplicationDbContext _context = new ApplicationDbContext();
 
         //User menager starts here
