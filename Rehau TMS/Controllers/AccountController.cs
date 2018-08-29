@@ -15,6 +15,7 @@ using Rehau_TMS.Models;
 
 namespace Rehau_TMS.Controllers
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class AccountController : Controller
     {
 

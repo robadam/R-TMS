@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Rehau_TMS.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         // GET: Account/Login

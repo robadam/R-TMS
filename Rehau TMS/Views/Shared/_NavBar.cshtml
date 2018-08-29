@@ -10,8 +10,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Kalendarz", "Index", "Schedule")</li>
-                <li>@Html.ActionLink("Użytkownicy", "Index", "Account")</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Kalendarz", "Index", "Schedule")</li>
+
+                    if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                    {
+                        <li>@Html.ActionLink("Użytkownicy", "Index", "Account")</li>
+                        <li>@Html.ActionLink("Narzędzia", "Index", "Tool")</li>
+                        <li>@Html.ActionLink("Artykuły", "Index", "Article")</li>
+                    }
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
