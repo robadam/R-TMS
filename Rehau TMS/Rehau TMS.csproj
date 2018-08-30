@@ -363,7 +363,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Migrations\201806171439213_initial.cs" />
     <Compile Include="Migrations\201806171439213_initial.Designer.cs">
       <DependentUpon>201806171439213_initial.cs</DependentUpon>
@@ -381,7 +383,13 @@
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Options.cs" />
+    <Compile Include="Models\OptionsAdditional.cs" />
+    <Compile Include="Models\Tool.cs" />
+    <Compile Include="Models\ToolStatus.cs" />
+    <Compile Include="Models\WorkType.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -440,6 +448,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Article\" />
+    <Folder Include="Views\Tool\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
