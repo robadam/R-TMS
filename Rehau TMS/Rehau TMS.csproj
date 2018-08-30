@@ -382,11 +382,15 @@
     <Compile Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.Designer.cs">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808302028058_AddingAdditionalDbSets.cs" />
+    <Compile Include="Migrations\201808302028058_AddingAdditionalDbSets.Designer.cs">
+      <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Option.cs" />
-    <Compile Include="Models\OptionAdditional.cs" />
+    <Compile Include="Models\Options.cs" />
+    <Compile Include="Models\OptionsAdditional.cs" />
     <Compile Include="Models\Tool.cs" />
     <Compile Include="Models\ToolStatus.cs" />
     <Compile Include="Models\WorkType.cs" />
@@ -448,6 +452,10 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Tool\Index.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Tool\Create.cshtml" />
+    <Content Include="Views\Tool\Edit.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -477,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.resx">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808302028058_AddingAdditionalDbSets.resx">
+      <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

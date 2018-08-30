@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Rehau_TMS.Models
 {
-    public class OptionAdditional
+    public class Options
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int OptionsId { get; set; }
+        public int ToolsModelStateId { get; set; }
     }
 }
