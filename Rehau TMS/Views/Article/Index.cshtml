@@ -1,5 +1,54 @@
+<<<<<<< HEAD
 ﻿@{
+=======
+﻿@model IEnumerable<Rehau_TMS.Models.Article>
+@{
+>>>>>>> UAT-mtrosz
     ViewBag.Title = "Artykuły";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
+=======
+<h2>Artykuły</h2>
+<br />
+@Html.ActionLink("Dodaj artykuł", "Create", "Tool", new { @class = "btn btn-default" })
+<br />
+<br />
+
+@if (Model == null)
+{
+    <p>Brak artykułów</p>
+}
+else
+{
+    <input type="text" class="form-control" id="Input" onkeyup="myFunction(1)" placeholder="Szukaj po numerze seryjnym">
+    <table class="table table-bordered table-hover" id="Table">
+
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Numer Seryjny</th>
+                <th>Status</th>
+                <th>Opcje</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td>@article.Name</td>
+                    <td>@article.ArticleSerialNumber</td>
+                    <td>@article.Status</td>
+                    <td>@Html.ActionLink("Edytuj", "Edit", "Article", new { id = article.ArticleId }, null)</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <script src="~/Scripts/SearchField.js"></script>
+}
+
+>>>>>>> UAT-mtrosz

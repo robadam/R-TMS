@@ -23,11 +23,15 @@ namespace Rehau_TMS.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name");
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name");
             return View();
         }
 
         public ActionResult Edit()
         {
+            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name");
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name");
             return View();
         }
     }
