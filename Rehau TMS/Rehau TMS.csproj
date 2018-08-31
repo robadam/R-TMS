@@ -382,10 +382,6 @@
     <Compile Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.Designer.cs">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808302028058_AddingAdditionalDbSets.cs" />
-    <Compile Include="Migrations\201808302028058_AddingAdditionalDbSets.Designer.cs">
-      <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -427,7 +423,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\SearchField.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -450,20 +445,13 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Tool\Index.cshtml" />
-=======
-    <Content Include="Views\Tool\Index.cshtml" />
-    <Content Include="Views\Article\Index.cshtml" />
-    <Content Include="Views\Tool\Create.cshtml" />
-    <Content Include="Views\Tool\Edit.cshtml" />
-    <Content Include="Views\Article\Edit.cshtml" />
-    <Content Include="Views\Article\Create.cshtml" />
->>>>>>> UAT-mtrosz
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Article\" />
+    <Folder Include="Views\Tool\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -490,9 +478,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.resx">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808302028058_AddingAdditionalDbSets.resx">
-      <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
