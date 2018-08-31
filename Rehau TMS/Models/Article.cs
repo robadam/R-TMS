@@ -8,7 +8,7 @@ namespace Rehau_TMS.Models
 {
     public class Article
     {
-        public int Id { get; set; }
+        public int ArticleId { get; set; }
         [Display(Name = "Nazwa Artykułu")]
         public string Name { get; set; }
         [Display(Name = "Numer Seryjny Artykułu")]
