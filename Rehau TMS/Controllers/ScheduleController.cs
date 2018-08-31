@@ -19,12 +19,36 @@ namespace Rehau_TMS.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            return View();
+            var schedulelist = _context.Schedule
+                .Include(s => s.ApplicationUser)
+                .Include(s => s.Article)
+                .Include(s => s.Tool)
+                .Include(s => s.WorkType)
+                .ToList();
+
+            return View(schedulelist);
         }
 
         public ActionResult Create()
         {
-            return View();
+            var appusers = _context.Users.ToList();
+            var articles = _context.Article.ToList();
+            var options = _context.Options.ToList();
+            var optionsadd = _context.OptionsAdditional.ToList();
+            var tools = _context.Tool.ToList();
+            var worktypes = _context.WorkType.ToList();
+
+            var viewModel = new ScheduleViewModel
+            {
+                ApplicationUsers = appusers,
+                Articles = articles,
+                Options = options,
+                OptionsAdditionals = optionsadd,
+                Tools = tools,
+                WorkTypes = worktypes
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult Edit()

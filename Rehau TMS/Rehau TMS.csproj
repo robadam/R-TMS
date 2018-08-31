@@ -382,11 +382,20 @@
     <Compile Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.Designer.cs">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808311720024_AddedScheduleModel.cs" />
+    <Compile Include="Migrations\201808311720024_AddedScheduleModel.Designer.cs">
+      <DependentUpon>201808311720024_AddedScheduleModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808311746135_ExtendFieldsOfScheduleModel.cs" />
+    <Compile Include="Migrations\201808311746135_ExtendFieldsOfScheduleModel.Designer.cs">
+      <DependentUpon>201808311746135_ExtendFieldsOfScheduleModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\OptionsAdditional.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tool.cs" />
     <Compile Include="Models\ToolStatus.cs" />
     <Compile Include="Models\WorkType.cs" />
@@ -397,6 +406,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -447,11 +457,10 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Tool\Index.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Article\" />
-    <Folder Include="Views\Tool\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -478,6 +487,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807161815496_AddedIsActiveAtrbToUsers.resx">
       <DependentUpon>201807161815496_AddedIsActiveAtrbToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808311720024_AddedScheduleModel.resx">
+      <DependentUpon>201808311720024_AddedScheduleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808311746135_ExtendFieldsOfScheduleModel.resx">
+      <DependentUpon>201808311746135_ExtendFieldsOfScheduleModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
