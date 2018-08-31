@@ -37,13 +37,6 @@ namespace Rehau_TMS.Models
         {
         }
 
-        public DbSet<Article> Article { get; set; }
-        public DbSet<Options> Options { get; set; }
-        public DbSet<OptionsAdditional> OptionsAdditional { get; set; }
-        public DbSet<Tool> Tool { get; set; }
-        public DbSet<ToolStatus> ToolStatus { get; set; }
-        public DbSet<WorkType> WorkType { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

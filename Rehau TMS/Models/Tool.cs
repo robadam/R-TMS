@@ -8,7 +8,7 @@ namespace Rehau_TMS.Models
 {
     public class Tool
     {
-        public int ToolId { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Nazwa Narzędzia")]
         public string Name { get; set; }
         [Display(Name = "Status Narzędzia")]

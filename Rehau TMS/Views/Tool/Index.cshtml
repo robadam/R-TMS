@@ -1,52 +1,5 @@
-<<<<<<< HEAD
 ﻿@{
-=======
-﻿@model IEnumerable<Rehau_TMS.Models.Tool>
-@{
->>>>>>> UAT-mtrosz
     ViewBag.Title = "Narzędzia";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<<<<<<< HEAD
-=======
-<h2>Narzędzia</h2>
-<br />
-@Html.ActionLink("Dodaj narzędzie", "Create", "Tool", new { @class = "btn btn-default" })
-<br />
-<br />
-
-@if (Model==null)
-{
-    <p>Brak narzędzi</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Numer Seryjny</th>
-                <th>Status</th>
-                <th>Opcje</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            @foreach (var tool in Model)
-            {
-                <tr>
-                    <td>@tool.Name</td>
-                    <td>@tool.SerialNumber</td>
-                    <td>@tool.ToolsStatusId</td>
-                    <td>@Html.ActionLink("Edytuj", "Edit", "Tool", new { id = tool.ToolId }, null)</td>
-                </tr>
-            }
-
-        </tbody>
-    </table>
-}
-
->>>>>>> UAT-mtrosz
