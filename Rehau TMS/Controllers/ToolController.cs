@@ -19,6 +19,7 @@ namespace Rehau_TMS.Controllers
         // GET: Tool
         public ActionResult Index()
         {
+            var toolStatus = _context.ToolStatus;
             var toolsList = (from tool in _context.Tool
                                select new
                                {

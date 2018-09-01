@@ -24,6 +24,7 @@ else
                 <th>Nazwa</th>
                 <th>Numer Seryjny</th>
                 <th>Status</th>
+                <th>Artykuł</th>
                 <th>Opcje</th>
             </tr>
         </thead>
@@ -36,11 +37,13 @@ else
                     <td>@tool.Name</td>
                     <td>@tool.SerialNumber</td>
                     <td>@tool.ToolsStatusId</td>
+                    <td>@tool.ArticlesId</td>
                     <td>@Html.ActionLink("Edytuj", "Edit", "Tool", new { id = tool.ToolId }, null)</td>
                 </tr>
             }
 
         </tbody>
     </table>
+    <script src="~/Scripts/SearchField.js"></script>
 }
 
