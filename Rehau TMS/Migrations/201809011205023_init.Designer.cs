@@ -7,13 +7,13 @@ namespace Rehau_TMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddLoginNameSurnamePropForUser : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddLoginNameSurnamePropForUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806181622507_AddLoginNameSurnamePropForUser"; }
+            get { return "201809011205023_init"; }
         }
         
         string IMigrationMetadata.Source

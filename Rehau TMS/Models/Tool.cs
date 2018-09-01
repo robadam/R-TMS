@@ -8,17 +8,17 @@ namespace Rehau_TMS.Models
 {
     public class Tool
     {
-        public int ToolId { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Nazwa Narzędzia")]
         [Required]
         public string Name { get; set; }
         [Display(Name = "Status Narzędzia")]
-        [Required]
-        public int ToolsStatusId { get; set; }
+        public int ToolStatusId { get; set; }
         [Display(Name = "Nazwa Artykułu")]
-        public int ArticlesId { get; set; }
-        [Required]
+        public int ArticleId { get; set; }
         [Display(Name = "Numer Seryjny Narzędzia")]
         public string SerialNumber { get; set; }
+        public virtual ToolStatus ToolStatus { get; set; }
+        public virtual Article Articles { get; set; }
     }
 }

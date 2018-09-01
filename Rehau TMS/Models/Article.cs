@@ -9,7 +9,7 @@ namespace Rehau_TMS.Models
 {
     public class Article
     {
-        public int ArticleId { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Nazwa Artykułu")]
         [Required]
         public string Name { get; set; }

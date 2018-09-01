@@ -19,37 +19,23 @@ namespace Rehau_TMS.Controllers
         // GET: Tool
         public ActionResult Index()
         {
-            var toolStatus = _context.ToolStatus;
-            var toolsList = (from tool in _context.Tool
-                               select new
-                               {
-                                   ToolId = tool.ToolId,
-                                   Name = tool.Name,
-                                   ArticleId = tool.ArticlesId,
-                                   SerialNumber = tool.SerialNumber,
-                                   ToolStatusId = tool.ToolsStatusId
-                               }).ToList().Select(t => new Tool()
-
-                               {
-                                   ToolId = t.ToolId,
-                                   Name = t.Name,
-                                   ArticlesId = t.ArticleId,
-                                   SerialNumber = t.SerialNumber,
-                                   ToolsStatusId = t.ToolStatusId
-                               });
+            var toolsList = _context.Tool
+                .Include(t => t.Articles)
+                .Include(t => t.ToolStatus)
+                .ToList();
             return View(toolsList);
         }
 
         public ActionResult Create()
         {
-            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name");
-            ViewBag.ArticleId = new SelectList(_context.Article.Where(a => a.Status == true), "ArticleId", "Name");
+            ViewBag.ToolStatusId = new SelectList(_context.ToolStatus, "Id", "Name");
+            ViewBag.ArticleId = new SelectList(_context.Article.Where(a => a.Status == true), "Id", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ToolId,Name,ToolsStatusId,ArticlesId,SerialNumber")] Tool toolsModels)
+        public ActionResult Create([Bind(Include = "Id,Name,ToolStatusId,ArticleId,SerialNumber")] Tool toolsModels)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +44,8 @@ namespace Rehau_TMS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArticlesId = new SelectList(_context.Article, "ArticleId", "Name", toolsModels.ArticlesId);
-            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolsStatusId);
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name", toolsModels.ArticleId);
+            ViewBag.ToolStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolStatusId);
             return View(toolsModels);
         }
 
@@ -70,13 +56,13 @@ namespace Rehau_TMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArticlesId = new SelectList(_context.Article, "ArticleId", "Name", toolsModels.ArticlesId);
-            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolsStatusId);
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name", toolsModels.ArticleId);
+            ViewBag.ToolStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolStatusId);
             return View(toolsModels);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ToolId,Name,ToolsStatusId,ArticlesId,SerialNumber")] Tool toolsModels)
+        public ActionResult Edit([Bind(Include = "Id,Name,ToolsStatusId,ArticleId,SerialNumber")] Tool toolsModels)
         {
             if (ModelState.IsValid)
             {
@@ -84,8 +70,8 @@ namespace Rehau_TMS.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArticlesId = new SelectList(_context.Article, "ArticleId", "Name", toolsModels.ArticlesId);
-            ViewBag.ToolsStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolsStatusId);
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name", toolsModels.ArticleId);
+            ViewBag.ToolsStatuId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolStatusId);
             return View(toolsModels);
         }
 

@@ -22,14 +22,14 @@ namespace Rehau_TMS.Controllers
             var articleList = (from article in _context.Article
                                select new
                                {
-                                   ArticleId = article.ArticleId,
+                                   ArticleId = article.Id,
                                    Name = article.Name,
                                    SerialNumber = article.ArticleSerialNumber,
                                    Status = article.Status
                                }).ToList().Select(a => new Article()
 
                                {
-                                   ArticleId = a.ArticleId,
+                                   Id = a.ArticleId,
                                    Name = a.Name,
                                    ArticleSerialNumber = a.SerialNumber,
                                    Status = a.Status
@@ -43,7 +43,7 @@ namespace Rehau_TMS.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArticleId,Name,ArticleSerialNumber,Status")] Article articlesModels)
+        public ActionResult Create([Bind(Include = "Id,Name,ArticleSerialNumber,Status")] Article articlesModels)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Rehau_TMS.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArticleId,Name,ArticleSerialNumber,Status")] Article articlesModels)
+        public ActionResult Edit([Bind(Include = "Id,Name,ArticleSerialNumber,Status")] Article articlesModels)
         {
             if (ModelState.IsValid)
             {
