@@ -31,8 +31,8 @@ namespace Rehau_TMS.Controllers
 
         public ActionResult Create()
         {
-            var appusers = _context.Users.ToList();
-            var articles = _context.Article.ToList();
+            var appusers = _context.Users.Where(a => a.Name != "Admin" && a.IsActive == true).ToList();
+            var articles = _context.Article.Where(a => a.Status == true).ToList();
             var options = _context.Options.ToList();
             var optionsadd = _context.OptionsAdditional.ToList();
             var tools = _context.Tool.ToList();
@@ -51,9 +51,35 @@ namespace Rehau_TMS.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Schedule schedule)
         {
-            return View();
+            _context.Schedule.Add(schedule);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Schedule");
+        }
+
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult Edit(int Id)
+        {
+            var schedule = _context.Schedule.SingleOrDefault(s => s.Id == Id);
+            if (schedule == null)
+                return HttpNotFound();
+
+            var viewModel = new ScheduleViewModel
+            {
+                Schedule = schedule,
+
+                ApplicationUsers = _context.Users.Where(a => a.Name != "Admin" && a.IsActive == true).ToList(),
+                Articles = _context.Article.Where(a => a.Status == true).ToList(),
+                Options = _context.Options.ToList(),
+                OptionsAdditionals = _context.OptionsAdditional.ToList(),
+                Tools = _context.Tool.ToList(),
+                WorkTypes = _context.WorkType.ToList()
+            };
+
+            return View(viewModel);
         }
 
     }
