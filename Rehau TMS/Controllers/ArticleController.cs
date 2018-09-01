@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Rehau_TMS.ViewModels;
@@ -18,17 +19,71 @@ namespace Rehau_TMS.Controllers
         // GET: Article
         public ActionResult Index()
         {
-            return View();
+            var articleList = (from article in _context.Article
+                               select new
+                               {
+                                   ArticleId = article.ArticleId,
+                                   Name = article.Name,
+                                   SerialNumber = article.ArticleSerialNumber,
+                                   Status = article.Status
+                               }).ToList().Select(a => new Article()
+
+                               {
+                                   ArticleId = a.ArticleId,
+                                   Name = a.Name,
+                                   ArticleSerialNumber = a.SerialNumber,
+                                   Status = a.Status
+                               });
+            return View(articleList);
         }
 
         public ActionResult Create()
         {
             return View();
         }
-
-        public ActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ArticleId,Name,ArticleSerialNumber,Status")] Article articlesModels)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _context.Article.Add(articlesModels);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(articlesModels);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            Article articlesModels = _context.Article.Find(id);
+            if (articlesModels == null)
+            {
+                return HttpNotFound();
+            }
+            return View(articlesModels);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ArticleId,Name,ArticleSerialNumber,Status")] Article articlesModels)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(articlesModels).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(articlesModels);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

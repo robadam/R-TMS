@@ -1,5 +1,56 @@
-﻿@{
+﻿@model IEnumerable<Rehau_TMS.Models.Schedule>
+@{
     ViewBag.Title = "Kalendarz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Kalendarz pracy</h2>
+<br />
+@Html.ActionLink("Dodaj wpis", "Create", "Schedule", new { @class = "btn btn-default" })
+<br />
+<br />
+
+
+
+@if (!Model.Any())
+{
+    <p>Brak wpisów</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Użytkownik</th>
+                <th>Rodzaj pracy</th>
+                <th>Narzędzie</th>
+                <th>Artykuł</th>
+                <th>Opcje</th>
+                <th>Dodatkowe opcje</th>
+                <th>Ilość godzin</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Date</td>
+                    <td>@(item.ApplicationUser.Name + " " + item.ApplicationUser.Surname)</td>
+                    <td>@item.WorkType.Name</td>
+                    <td>@item.Tool.Name</td>
+                    <td>@item.Article.Name</td>
+                    <td>@item.Options.Name</td>
+                    <td>@item.OptionsAdditional.Name</td>
+                    <td>@item.ReportedHours</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

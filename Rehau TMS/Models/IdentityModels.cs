@@ -20,6 +20,11 @@ namespace Rehau_TMS.Models
         [Display(Name = "Status")]
         public bool IsActive { get; set; }
 
+        public string FullName
+        {
+            get { return Name + " " + Surname; }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -37,12 +42,16 @@ namespace Rehau_TMS.Models
         {
         }
 
+        //DB Sets STARTS
         public DbSet<Article> Article { get; set; }
         public DbSet<Options> Options { get; set; }
         public DbSet<OptionsAdditional> OptionsAdditional { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Tool> Tool { get; set; }
         public DbSet<ToolStatus> ToolStatus { get; set; }
         public DbSet<WorkType> WorkType { get; set; }
+
+        //DB Sets ENDS
 
         public static ApplicationDbContext Create()
         {

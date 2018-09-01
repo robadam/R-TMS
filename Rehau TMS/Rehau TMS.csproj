@@ -386,11 +386,20 @@
     <Compile Include="Migrations\201808302028058_AddingAdditionalDbSets.Designer.cs">
       <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808312000493_NewChanges.cs" />
+    <Compile Include="Migrations\201808312000493_NewChanges.Designer.cs">
+      <DependentUpon>201808312000493_NewChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809010848126_ChangingArticlesAndTools.cs" />
+    <Compile Include="Migrations\201809010848126_ChangingArticlesAndTools.Designer.cs">
+      <DependentUpon>201809010848126_ChangingArticlesAndTools.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\OptionsAdditional.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tool.cs" />
     <Compile Include="Models\ToolStatus.cs" />
     <Compile Include="Models\WorkType.cs" />
@@ -401,6 +410,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ScheduleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -456,6 +466,7 @@
     <Content Include="Views\Tool\Edit.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -488,6 +499,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808302028058_AddingAdditionalDbSets.resx">
       <DependentUpon>201808302028058_AddingAdditionalDbSets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808312000493_NewChanges.resx">
+      <DependentUpon>201808312000493_NewChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809010848126_ChangingArticlesAndTools.resx">
+      <DependentUpon>201809010848126_ChangingArticlesAndTools.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
