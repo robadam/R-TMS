@@ -15,9 +15,19 @@
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ApplicationUserId, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id="User" })
-        </div>
+        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+        {
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id = "User" })
+            </div>
+        }
+        else
+        {
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id = "User", disabled = "disabled" })
+            </div>
+        }
+        
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.Date, new { @class = "col-md-2 control-label" })

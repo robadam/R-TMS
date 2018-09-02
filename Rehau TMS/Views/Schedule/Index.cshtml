@@ -31,6 +31,7 @@ else
                 <th>Opcje</th>
                 <th>Dodatkowe opcje</th>
                 <th>Ilość godzin</th>
+                <th>Opcje</th>
             </tr>
         </thead>
 
@@ -48,6 +49,14 @@ else
                     <td>@item.Options.Name</td>
                     <td>@item.OptionsAdditional.Name</td>
                     <td>@item.ReportedHours</td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                    {
+                        <td>@Html.ActionLink("Edytuj", "Edit", "Schedule", new { id = item.Id }, null)</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
             }
 
