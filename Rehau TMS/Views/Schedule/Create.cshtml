@@ -1,4 +1,5 @@
 ﻿@model Rehau_TMS.ViewModels.ScheduleViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Dodaj wpis";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +17,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ApplicationUserId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName", User.Identity.GetUserId()), "Wybierz użytkownika", new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
