@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
-    $("#WorkTypeId").ready(function () {
+    $("#WorkType").ready(function () {
         $("#ArticleId").attr('disabled', 'disabled');
-        $.get("/ScheduleViewModels/GetArticlesList", { WorkTypeModelsId: $("#WorkTypeId").val() }, function (data) {
+        $.get("/ScheduleViewModels/GetArticlesList", { WorkTypeModelsId: $("#WorkType").val() }, function (data) {
             $("#ToolsModelsId").empty();
             $("#OptionsModelsId").empty();
             $('#OptionsAdditionalModelsId').empty;
@@ -10,7 +10,7 @@
             $('#OptionsModelsId').attr('disabled', 'disabled');
             $('#OptionsAdditionalModelsId').attr('disabled', 'disabled');
 
-            if ($("#ArticleId").empty() && $("#WorkTypeId").val() != 1) {
+            if ($("#ArticleId").empty() && $("#WorkType").val() != 1) {
                 $("#ArticleId").attr('disabled', 'disabled');
             }
             else
@@ -27,15 +27,15 @@
         });
     })
 
-    $("#WorkTypeId").change(function () {
-        $.get("/ScheduleViewModels/GetArticlesList", { WorkTypeModelsId: $("#WorkTypeId").val() }, function (data) {
+    $("#WorkType").change(function () {
+        $.get("/ScheduleViewModels/GetArticlesList", { WorkTypeModelsId: $("#WorkType").val() }, function (data) {
             $("#ArticleId").empty()
             $("#ToolsModelsId").empty();
             $("#OptionsModelsId").empty();
             $("#OptionsAdditionalModelsId").empty();
 
 
-            if ($("#ArticleId").empty() && $("#WorkTypeId").val() != 1) {
+            if ($("#ArticleId").empty() && $("#WorkType").val() != 1) {
                 $("#ArticleId").attr('disabled', 'disabled');
                 $("#ToolsModelsId").attr('disabled', 'disabled');
                 $('#OptionsModelsId').attr('disabled', 'disabled');

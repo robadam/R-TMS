@@ -16,49 +16,49 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ApplicationUserId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id="User" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.Date, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control", id="Date" } })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.WorkTypeId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.WorkTypeId, new SelectList(Model.WorkTypes, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.WorkTypeId, new SelectList(Model.WorkTypes, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control", id="WorkType" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ArticleId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.ArticleId, new SelectList(Model.Articles, "Id", "Name"), "Wybierz narzędzie", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.ArticleId, new SelectList(Model.Articles, "Id", "Name"), "Wybierz narzędzie", new { @class = "form-control", id="Article" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ToolId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.ToolId, new SelectList(Model.Tools, "Id", "Name"), "Wybierz narzędzie", new { @class = "form-control", @id="ToolId" })
+            @Html.DropDownListFor(m => m.Schedule.ToolId, new SelectList(Model.Tools, "Id", "Name"), "Wybierz narzędzie", new { @class = "form-control", id="Tool" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Schedule.OptionsId, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Schedule.OptionsId, new { @class = "col-md-2 control-label"})
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.OptionsId, new SelectList(Model.Options, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.OptionsId, new SelectList(Model.Options, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control", id="Options" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.OptionsAdditionalId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Schedule.OptionsAdditionalId, new SelectList(Model.OptionsAdditionals, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Schedule.OptionsAdditionalId, new SelectList(Model.OptionsAdditionals, "Id", "Name"), "Wybierz rodzaj pracy", new { @class = "form-control", id= "OptionsAdditional" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ReportedHours, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Schedule.ReportedHours, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.Schedule.ReportedHours, new { htmlAttributes = new { @class = "form-control", id="ReportedHours" } })
         </div>
     </div>
     <div class="form-group">
@@ -71,3 +71,138 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#WorkType").ready(function () {
+            $("#Tool").empty();
+            $("#Options").empty();
+            $('#OptionsAdditional').empty();
+
+            $("#Tool").attr('disabled', 'disabled');
+            $('#Options').attr('disabled', 'disabled');
+            $('#OptionsAdditional').attr('disabled', 'disabled');
+
+            $.get("/Schedule/GetArticlesList", { WorkTypeModelsId: $("#WorkType").val() }, function (data) {
+
+                $("#Tool").empty();
+                $("#Options").empty();
+                $('#OptionsAdditional').empty;
+
+                $("#Tool").attr('disabled', 'disabled');
+                $('#Options').attr('disabled', 'disabled');
+                $('#OptionsAdditional').attr('disabled', 'disabled');
+
+                if ($("#Article").empty() == true || $("#WorkType").val() < 2) {
+                    $("#Article").attr('disabled', 'disabled');
+                }
+                else {
+                    $("#Article").removeAttr('disabled');
+                    $.each(data, function (index, row) {
+                        $("#Article").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                    });
+                }
+
+
+                $(function () {
+                    $("#Article option[value='0']").attr("disabled", "disabled");
+                    $("#Tool option[value='0']").attr("disabled", "disabled");
+                });
+            });
+        })
+
+        $("#WorkType").change(function () {
+            $.get("/Schedule/GetArticlesList", { WorkTypeModelsId: $("#WorkType").val() }, function (data) {
+                $("#Article").empty()
+                $("#Tool").empty();
+                $("#Options").empty();
+                $("#OptionsAdditional").empty();
+
+                if ($("#Article").empty() == true || $("#WorkType").val() < 2) {
+                    $("#Article").attr('disabled', 'disabled');
+                }
+                else {
+                    $("#Article").removeAttr('disabled');
+                    $.each(data, function (index, row) {
+                        $("#Article").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                    });
+                }
+
+                $(function () {
+                    $("#Article option[value='0']").attr("disabled", "disabled");
+                });
+            });
+        })
+
+            $("#Article").change(function () {
+                $.get("/Schedule/GetToolsList", { ArticlesModelsId: $("#Article").val() }, function (data) {
+                    $("#Options").empty();
+                    $("#OptionsAdditional").empty();
+
+                    $("#Tool").removeAttr('disabled');
+
+                    if ($("#Tool").empty() == true) {
+                        $("#Tool").attr('disabled', 'disabled');
+       
+                    }
+                    else {
+                        $("#Tool").removeAttr('disabled');
+                        $.each(data, function (index, row) {
+                            $("#Tool").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                        })
+                    }
+
+                    $('#Options').attr('disabled', 'disabled');
+                    $('#OptionsAdditional').attr('disabled', 'disabled');
+
+                    $(function () {
+                        $("#Tool option[value='0']").attr("disabled", "disabled");
+                    });
+                });
+        })
+
+            $("#Tool").change(function () {
+                $.get("/Schedule/GetOptionsList", { ToolsModelsId: $("#Tool").val() }, function (data) {
+                    $("#Options").empty();
+                    $("#OptionsAdditional").empty();
+
+                    $("#Options").removeAttr('disabled');
+                    $("#OptionsAdditional").attr('disabled', 'disabled');
+
+                    $.each(data, function (index, row) {
+                        $("#Options").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                    });
+
+                    $(function () {
+                        $("#Options option[value='0']").attr("disabled", "disabled");
+                    });
+                });
+            })
+
+            $("#Options").change(function () {
+                $.get("/Schedule/GetOptionsAdditionalList", { OptionsModelsId: $("#Options").val() }, function (data) {
+                    $("#OptionsAdditional").empty();
+
+                    $("#OptionsAdditional").removeAttr('disabled');
+
+                    if ($("#OptionsAdditional").empty() && $("#Options").val() != 1) {
+                        $("#OptionsAdditional").attr('disabled', 'disabled');
+                    }
+                    else {
+                        $("#Tool").removeAttr('disabled');
+
+
+                        $.each(data, function (index, row) {
+                            $("#OptionsAdditional").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                        });
+                    }
+
+                    $(function () {
+                        $("#OptionsAdditional option[value='0']").attr("disabled", "disabled");
+                    });
+                });
+            })
+    });
+</script>
+

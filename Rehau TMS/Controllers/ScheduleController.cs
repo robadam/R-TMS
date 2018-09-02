@@ -29,6 +29,50 @@ namespace Rehau_TMS.Controllers
             return View(schedulelist);
         }
 
+        public JsonResult GetArticlesList()
+        {
+            _context.Configuration.ProxyCreationEnabled = false;
+            List<Article> ArticlesList = _context.Article.Where(x => x.Status == true).ToList();
+            var t = new Article();
+            t.Name = "Wybierz artyku³";
+            ArticlesList.Insert(0, t);
+            return Json(ArticlesList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetToolsList(int ArticlesModelsId)
+        {
+            _context.Configuration.ProxyCreationEnabled = false;
+            List<Tool> ToolsList = _context.Tool.Where(x => x.ToolStatusId < 3 && x.Id > 0 && x.ArticleId == ArticlesModelsId).ToList();
+            var t = new Tool();
+            t.Name = "--Wybierz narzêdzie--";
+            ToolsList.Insert(0, t);
+            return Json(ToolsList, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult GetOptionsList(int ToolsModelsid)
+        {
+            _context.Configuration.ProxyCreationEnabled = false;
+            List<Tool> t = _context.Tool.Where(a => a.Id == ToolsModelsid).ToList();
+            var st = t.First();
+            int state = st.ToolStatusId;
+            List<Options> OptionsList = _context.Options.Where(x => x.ToolsModelStateId == state && x.Id > 0).ToList();
+            var o = new Options();
+            o.Name = "--Wybierz opcjê--";
+            OptionsList.Insert(0, o);
+            return Json(OptionsList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetOptionsAdditionalList(int OptionsModelsId)
+        {
+            _context.Configuration.ProxyCreationEnabled = false;
+            List<OptionsAdditional> OptionsAdditionalsList = _context.OptionsAdditional.Where(x => x.OptionsId == OptionsModelsId && x.Id > 0).ToList();
+            var o = new OptionsAdditional();
+            o.Name = "--Wybierz podopcjê--";
+            OptionsAdditionalsList.Insert(0, o);
+            return Json(OptionsAdditionalsList, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Create()
         {
             var appusers = _context.Users.ToList();
