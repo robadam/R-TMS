@@ -1,4 +1,5 @@
 ﻿@model Rehau_TMS.ViewModels.ScheduleViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Dodaj wpis";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,13 +19,13 @@
         @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
         {
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id = "User" })
+                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName", User.Identity.GetUserId()), "Wybierz użytkownika", new { @class = "form-control" })
             </div>
         }
         else
         {
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName"), "Wybierz użytkownika", new { @class = "form-control", id = "User", disabled = "disabled" })
+                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName", User.Identity.GetUserId()), "Wybierz użytkownika", new { @class = "form-control", id = "User", disabled = "disabled" })
             </div>
         }
         
@@ -32,7 +33,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.Date, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control", id="Date" } })
+            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control", id = "Date", value = DateTime.Today.ToShortDateString() } })
         </div>
     </div>
     <div class="form-group">

@@ -18,7 +18,6 @@ namespace Rehau_TMS.Controllers
     [Authorize(Roles = "Admin, Moderator")]
     public class AccountController : Controller
     {
-
         ApplicationDbContext _context = new ApplicationDbContext();
 
         //User menager starts here
@@ -58,28 +57,29 @@ namespace Rehau_TMS.Controllers
 
         public ActionResult Index()
         {
-            var userslist = (from user in _context.Users where user.Name != "Admin"
-                                  select new
-                                  {
-                                      UserId = user.Id,
-                                      Username = user.UserName,
-                                      Name = user.Name,
-                                      Surname = user.Surname,
-                                      IsActive = user.IsActive,
-                                      RoleNames = (from userRole in user.Roles
-                                                   join role in _context.Roles on userRole.RoleId
-                                                   equals role.Id
-                                                   select role.Name).ToList()
-                                  }).ToList().Select(p => new UserListViewModel()
+            var userslist = (from user in _context.Users
+                             where user.Name != "Admin"
+                             select new
+                             {
+                                 UserId = user.Id,
+                                 Username = user.UserName,
+                                 Name = user.Name,
+                                 Surname = user.Surname,
+                                 IsActive = user.IsActive,
+                                 RoleNames = (from userRole in user.Roles
+                                              join role in _context.Roles on userRole.RoleId
+                                              equals role.Id
+                                              select role.Name).ToList()
+                             }).ToList().Select(p => new UserListViewModel()
 
-                                  {
-                                      UserId = p.UserId,
-                                      Username = p.Username,
-                                      Name = p.Name,
-                                      Surname = p.Surname,
-                                      IsActive = p.IsActive,
-                                      Role = string.Join(",", p.RoleNames)
-                                  });
+                             {
+                                 UserId = p.UserId,
+                                 Username = p.Username,
+                                 Name = p.Name,
+                                 Surname = p.Surname,
+                                 IsActive = p.IsActive,
+                                 Role = string.Join(",", p.RoleNames)
+                             });
 
 
             return View(userslist);
@@ -117,7 +117,7 @@ namespace Rehau_TMS.Controllers
                 {
                     ModelState.AddModelError("", "Nieprawidłowa nazwa użytkownika lub hasło.");
                 }
-                
+
 
             }
 
@@ -143,7 +143,7 @@ namespace Rehau_TMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Login, Name = model.Name, Surname = model.Surname, IsActive = true};
+                var user = new ApplicationUser() { UserName = model.Login, Name = model.Name, Surname = model.Surname, IsActive = true };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
