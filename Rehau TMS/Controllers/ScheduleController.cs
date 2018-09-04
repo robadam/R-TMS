@@ -19,13 +19,29 @@ namespace Rehau_TMS.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-                    var schedulelist = _context.Schedule
-                        .Include(s => s.ApplicationUser)
-                        .Include(s => s.Article)
-                        .Include(s => s.Tool)
-                        .Include(s => s.WorkType)
-                        .ToList();
-                    return View(schedulelist);
+            if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                var adminschedulelist = _context.Schedule
+                    .Include(s => s.ApplicationUser)
+                    .Include(s => s.Article)
+                    .Include(s => s.Tool)
+                    .Include(s => s.WorkType)
+                    .ToList()
+                    .OrderByDescending(o => o.Id);
+
+                return View(adminschedulelist);
+            };
+
+            string curruser = User.Identity.GetUserId();
+            var schedulelist = _context.Schedule.Where(u => u.ApplicationUserId == curruser)
+                .Include(s => s.ApplicationUser)
+                .Include(s => s.Article)
+                .Include(s => s.Tool)
+                .Include(s => s.WorkType)
+                .ToList()
+                .OrderByDescending(o => o.Id);
+
+            return View(schedulelist);
         }
 
         public JsonResult GetArticlesList()
