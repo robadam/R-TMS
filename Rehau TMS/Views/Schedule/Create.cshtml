@@ -16,24 +16,22 @@
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.ApplicationUserId, new { @class = "col-md-2 control-label" })
-        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-        {
-            <div class="col-md-10">
+        <div class="col-md-10">
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
                 @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName", User.Identity.GetUserId()), "Wybierz użytkownika", new { @class = "form-control" })
-            </div>
-        }
-        else
-        {
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers, "Id", "FullName", User.Identity.GetUserId()), "Wybierz użytkownika", new { @class = "form-control", id = "User", disabled = "disabled" })
-            </div>
-        }
+            }
+            else
+            {
+                @Html.DropDownListFor(m => m.Schedule.ApplicationUserId, new SelectList(Model.ApplicationUsers.Where(u => u.Id == User.Identity.GetUserId()), "Id", "FullName", User.Identity.GetUserId()), new { @class = "form-control" })
+            }
+        </div>
         
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Schedule.Date, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control", id = "Date", @Value = DateTime.Now.ToShortDateString() } })
+            @Html.EditorFor(m => m.Schedule.Date, new { htmlAttributes = new { @class = "form-control", @value = System.DateTime.Now.ToShortDateString(), id="Date" } })
         </div>
     </div>
     <div class="form-group">
@@ -105,7 +103,7 @@
                 $('#Options').attr('disabled', 'disabled');
                 $('#OptionsAdditional').attr('disabled', 'disabled');
 
-                if ($("#Article").empty() == true || $("#WorkType").val() < 2) {
+                if ($("#Article").empty() == true || $("#WorkType").val() != 1) {
                     $("#Article").attr('disabled', 'disabled');
                 }
                 else {
@@ -130,7 +128,11 @@
                 $("#Options").empty();
                 $("#OptionsAdditional").empty();
 
-                if ($("#Article").empty() == true || $("#WorkType").val() < 2) {
+                $("#Tool").attr('disabled', 'disabled');
+                $('#Options').attr('disabled', 'disabled');
+                $('#OptionsAdditional').attr('disabled', 'disabled');
+
+                if ($("#Article").empty() == true || $("#WorkType").val() != 1) {
                     $("#Article").attr('disabled', 'disabled');
                 }
                 else {

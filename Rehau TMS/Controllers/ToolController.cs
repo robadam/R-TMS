@@ -56,8 +56,8 @@ namespace Rehau_TMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name", toolsModels.ArticleId);
-            ViewBag.ToolStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolStatusId);
+            ViewBag.ArticleId = new SelectList(_context.Article, "Id", "Name", toolsModels.Articles);
+            ViewBag.ToolStatusId = new SelectList(_context.ToolStatus, "Id", "Name", toolsModels.ToolStatus);
             return View(toolsModels);
         }
         [HttpPost]

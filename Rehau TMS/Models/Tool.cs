@@ -16,7 +16,7 @@ namespace Rehau_TMS.Models
         public int ToolStatusId { get; set; }
         [Display(Name = "Nazwa Artykułu")]
         public int ArticleId { get; set; }
-        [Display(Name = "Numer Seryjny Narzędzia")]
+        [Display(Name = "Numer Seryjny WA")]
         public string SerialNumber { get; set; }
         public virtual ToolStatus ToolStatus { get; set; }
         public virtual Article Articles { get; set; }
