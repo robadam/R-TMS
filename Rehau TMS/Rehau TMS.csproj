@@ -390,6 +390,10 @@
     <Compile Include="Migrations\201808311746135_ExtendFieldsOfScheduleModel.Designer.cs">
       <DependentUpon>201808311746135_ExtendFieldsOfScheduleModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809081833120_AddRequiredFieldsToScheduleAndIdentityModels.cs" />
+    <Compile Include="Migrations\201809081833120_AddRequiredFieldsToScheduleAndIdentityModels.Designer.cs">
+      <DependentUpon>201809081833120_AddRequiredFieldsToScheduleAndIdentityModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -413,6 +417,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\2000pxRehauLogo.png" />
+    <Content Include="Content\Images\RehauLogoNoText.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -495,6 +501,9 @@
     <EmbeddedResource Include="Migrations\201808311746135_ExtendFieldsOfScheduleModel.resx">
       <DependentUpon>201808311746135_ExtendFieldsOfScheduleModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809081833120_AddRequiredFieldsToScheduleAndIdentityModels.resx">
+      <DependentUpon>201809081833120_AddRequiredFieldsToScheduleAndIdentityModels.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -522,6 +531,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties Content_4bootstrap_1css_1map__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
