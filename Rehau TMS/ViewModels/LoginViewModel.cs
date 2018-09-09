@@ -40,7 +40,7 @@ namespace Rehau_TMS.ViewModels
         }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} musi zawierać minimum {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi zawierać minimum {2} znaków.", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
@@ -101,7 +101,7 @@ namespace Rehau_TMS.ViewModels
         public string UserId { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} musi zawierać minimum {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi zawierać minimum {2} znaków.", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }

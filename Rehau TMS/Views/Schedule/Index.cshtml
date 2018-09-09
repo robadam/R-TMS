@@ -30,6 +30,7 @@ else
                 <th>Artykuł</th>
                 <th>Opcje</th>
                 <th>Dodatkowe opcje</th>
+                <th word-break; width="200px">Uwagi</th>
                 <th>Ilość godzin</th>
                 <th>Opcje</th>
             </tr>
@@ -42,12 +43,13 @@ else
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Date.ToShortDateString()</td>
-                    <td>@(item.ApplicationUser.Name + " " + item.ApplicationUser.Surname)</td>
+                    <td>@item.ApplicationUser.FullName</td>
                     <td>@item.WorkType.Name</td>
                     <td>@item.Tool.Name</td>
                     <td>@item.Article.Name</td>
                     <td>@item.Options.Name</td>
                     <td>@item.OptionsAdditional.Name</td>
+                    <td>@item.Info</td>
                     <td>@item.ReportedHours</td>
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                     {

@@ -76,8 +76,13 @@ namespace Rehau_TMS.Controllers
         }
 
         [Authorize(Roles = "Admin, Moderator")]
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int? Id)
         {
+            if(Id == null)
+            {
+                return HttpNotFound();
+            }
+
             var schedule = _context.Schedule.SingleOrDefault(s => s.Id == Id);
             if (schedule == null)
                 return HttpNotFound();
@@ -95,6 +100,20 @@ namespace Rehau_TMS.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Schedule schedule)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(schedule).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Schedule");
+            }
+
+            return View(schedule);
         }
 
         public JsonResult GetArticlesList()

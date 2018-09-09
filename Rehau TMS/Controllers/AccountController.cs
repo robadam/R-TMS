@@ -70,7 +70,7 @@ namespace Rehau_TMS.Controllers
                                               join role in _context.Roles on userRole.RoleId
                                               equals role.Id
                                               select role.Name).ToList()
-                             }).ToList().Select(p => new UserListViewModel()
+                             }).ToList().OrderBy(u => u.Name).ThenBy(u => u.Surname).Select(p => new UserListViewModel()
 
                              {
                                  UserId = p.UserId,

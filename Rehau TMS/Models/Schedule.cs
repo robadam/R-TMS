@@ -9,17 +9,21 @@ namespace Rehau_TMS.Models
 {
     public class Schedule
     {
+        [Required]
         [Display(Name = "ID")]
         public int Id { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data")]
         public DateTime Date { get; set; }
 
+        [Required]
         [Display(Name = "Użytkownik")]
         public string ApplicationUserId { get; set; }
 
+        [Required]
         [Display(Name = "Rodzaj pracy")]
         public int WorkTypeId { get; set; }
 
@@ -35,10 +39,15 @@ namespace Rehau_TMS.Models
         [Display(Name = "Dodatkowa opcja")]
         public int OptionsAdditionalId { get; set; }
 
+        [Required]
         [Display(Name = "Ilość godzin")]
         [Range(1, 20,
         ErrorMessage = "Wartość musi być pomiędzy {1} - {2}.")]
         public int ReportedHours { get; set; }
+
+        [Display(Name = "Uwagi")]
+        [StringLength(200, ErrorMessage = "Długość nie może być dłuższa niżeli {1} znaków")]
+        public string Info { get; set; }
 
         //Lazy loading
         public virtual Article Article { get; set; }

@@ -11,12 +11,15 @@ namespace Rehau_TMS.Models
     public class ApplicationUser : IdentityUser
     {
 
+        [Required]
         [Display(Name = "Imię")]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
 
+        [Required]
         [Display(Name = "Status")]
         public bool IsActive { get; set; }
 
