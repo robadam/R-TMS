@@ -390,6 +390,7 @@
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tool.cs" />
     <Compile Include="Models\ToolStatus.cs" />
+    <Compile Include="Models\UtilityClass.cs" />
     <Compile Include="Models\WorkType.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
