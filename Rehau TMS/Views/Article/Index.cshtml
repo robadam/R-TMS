@@ -36,7 +36,7 @@ else
                     <td>@article.Name</td>
                     <td>@article.ArticleSerialNumber</td>
                     <td>@(article.Status ? "Aktywny" : "Zablokowany")</td>
-                    <td>@Html.ActionLink("Edytuj", "Edit", "Article", new { id = article.Id }, null)</td>
+                    <td>@Html.ActionLink("Edytuj", "Edit", "Article", new { id = article.Id }, null) | @Html.ActionLink("Narzędzia", "Details", "Article", new { id = article.Id }, null) </td>
                 </tr>
             }
             

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Rehau_TMS.Models.Tool>
+@{
+    ViewBag.Title = "Narzędzia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Narzędzia przypisane do artykułu @Model.First().Articles.ArticleSerialNumber</h2>
+<br />
+<br />
+
+@if (!Model.Any())
+{
+    <p>Brak narzędzi</p>
+}
+else
+{
+    <table class="table table-bordered table-hover" id="Table">
+
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Numer Seryjny WA</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var tool in Model)
+            {
+                <tr>
+                    <td>@tool.Name</td>
+                    <td>@tool.SerialNumber</td>
+                    <td>@tool.ToolStatus.Name</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+

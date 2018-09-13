@@ -85,5 +85,11 @@ namespace Rehau_TMS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Details(int? id)
+        {
+            var articleDetails = _context.Tool.Where(t => t.ArticleId == id);
+            return View(articleDetails);
+        }
     }
 }
