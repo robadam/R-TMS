@@ -28,16 +28,16 @@ namespace Rehau_TMS.Models
         public int WorkTypeId { get; set; }
 
         [Display(Name = "Narzędzie")]
-        public int ToolId { get; set; }
+        public int? ToolId { get; set; }
 
         [Display(Name = "Artykuł")]
-        public int ArticleId { get; set; }
+        public int? ArticleId { get; set; }
 
         [Display(Name = "Opcja")]
-        public int OptionsId { get; set; }
+        public int? OptionsId { get; set; }
 
         [Display(Name = "Dodatkowa opcja")]
-        public int OptionsAdditionalId { get; set; }
+        public int? OptionsAdditionalId { get; set; }
 
         [Required]
         [Display(Name = "Ilość godzin")]
