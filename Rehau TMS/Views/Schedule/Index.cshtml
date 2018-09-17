@@ -45,10 +45,35 @@ else
                     <td>@item.Date.ToShortDateString()</td>
                     <td>@item.ApplicationUser.FullName</td>
                     <td>@item.WorkType.Name</td>
-                    <td>@item.Tool.Name</td>
-                    <td>@item.Article.Name</td>
-                    <td>@item.Options.Name</td>
-                    <td>@item.OptionsAdditional.Name</td>
+
+                    <td>
+                        @if (item.ToolId != null)
+                        {
+                            @item.Tool.Name
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.ArticleId != null)
+                        {
+                            @item.Article.Name
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.OptionsId != null)
+                        {
+                            @item.Options.Name
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.OptionsAdditionalId != null)
+                        {
+                            @item.OptionsAdditional.Name
+                        }
+                    </td>
+
                     <td>@item.Info</td>
                     <td>@item.ReportedHours</td>
                     @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
