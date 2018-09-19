@@ -382,6 +382,10 @@
     <Compile Include="Migrations\201809091240143_AddInfoFieldToScheduleModel.Designer.cs">
       <DependentUpon>201809091240143_AddInfoFieldToScheduleModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171612539_error.cs" />
+    <Compile Include="Migrations\201809171612539_error.Designer.cs">
+      <DependentUpon>201809171612539_error.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -418,6 +422,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CreateScheduleViewModelJQueryScript.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -495,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809091240143_AddInfoFieldToScheduleModel.resx">
       <DependentUpon>201809091240143_AddInfoFieldToScheduleModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171612539_error.resx">
+      <DependentUpon>201809171612539_error.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

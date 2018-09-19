@@ -51,7 +51,7 @@ namespace Rehau_TMS.Controllers
 
         public ActionResult Edit(int? id)
         {
-            Tool toolsModels = _context.Tool.Find(id);
+            Tool toolsModels = _context.Tool.SingleOrDefault(t => t.Id == id);
             if (toolsModels == null)
             {
                 return HttpNotFound();
@@ -62,7 +62,7 @@ namespace Rehau_TMS.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ToolsStatusId,ArticleId,SerialNumber")] Tool toolsModels)
+        public ActionResult Edit(Tool toolsModels)
         {
             if (ModelState.IsValid)
             {
