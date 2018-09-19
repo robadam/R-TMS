@@ -10,6 +10,15 @@
 <br />
 <br />
 
+<div class="form-group form-group-sm">
+    <div class="col-md-8">
+        @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date" })
+        @Html.TextBox("end", null, new { @class = "form-control datepicker", type = "date" })
+    </div>
+    <br />
+</div>
+<br />
+<br />
 
 
 @if (!Model.Any())
@@ -18,78 +27,78 @@
 }
 else
 {
-    <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover">
 
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Data</th>
-                <th>Użytkownik</th>
-                <th>Rodzaj pracy</th>
-                <th>Narzędzie</th>
-                <th>Artykuł</th>
-                <th>Opcje</th>
-                <th>Dodatkowe opcje</th>
-                <th word-break; width="200px">Uwagi</th>
-                <th>Ilość godzin</th>
-                <th>Opcje</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Date.ToShortDateString()</td>
-                    <td>@item.ApplicationUser.FullName</td>
-                    <td>@item.WorkType.Name</td>
-
-                    <td>
-                        @if (item.ToolId != null)
-                        {
-                            @item.Tool.Name
-                        }
-                    </td>
-
-                    <td>
-                        @if (item.ArticleId != null)
-                        {
-                            @item.Article.Name
-                        }
-                    </td>
-
-                    <td>
-                        @if (item.OptionsId != null)
-                        {
-                            @item.Options.Name
-                        }
-                    </td>
-
-                    <td>
-                        @if (item.OptionsAdditionalId != null)
-                        {
-                            @item.OptionsAdditional.Name
-                        }
-                    </td>
-
-                    <td>@item.Info</td>
-                    <td>@item.ReportedHours</td>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                    {
-                        <td>@Html.ActionLink("Edytuj", "Edit", "Schedule", new { id = item.Id }, null)</td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Użytkownik</th>
+                    <th>Rodzaj pracy</th>
+                    <th>Narzędzie</th>
+                    <th>Artykuł</th>
+                    <th>Opcje</th>
+                    <th>Dodatkowe opcje</th>
+                    <th word-break; width="200px">Uwagi</th>
+                    <th>Ilość godzin</th>
+                    <th>Opcje</th>
                 </tr>
-            }
+            </thead>
 
-        </tbody>
-    </table>
-    <script>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.ApplicationUser.FullName</td>
+                        <td>@item.WorkType.Name</td>
+
+                        <td>
+                            @if (item.ToolId != null)
+                            {
+                                @item.Tool.Name
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.ArticleId != null)
+                            {
+                                @item.Article.Name
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.OptionsId != null)
+                            {
+                                @item.Options.Name
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.OptionsAdditionalId != null)
+                            {
+                                @item.OptionsAdditional.Name
+                            }
+                        </td>
+
+                        <td>@item.Info</td>
+                        <td>@item.ReportedHours</td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                    {
+                            <td>@Html.ActionLink("Edytuj", "Edit", "Schedule", new { id = item.Id }, null)</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <script>
             var $table = document.getElementById("Table"),
                 // number of rows per page
                 $n = 25,
@@ -153,5 +162,5 @@ else
                 $buttons += "<input type='button' value='Next &gt;&gt;' onclick='sort(" + ($cur + 1) + ")' " + $nextDis + ">";
                 return $buttons;
             }
-    </script>
-}
+        </script>
+        }

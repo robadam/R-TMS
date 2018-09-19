@@ -17,8 +17,16 @@ namespace Rehau_TMS.Controllers
         ApplicationDbContext _context = new ApplicationDbContext();
 
         // GET: Schedule
-        public ActionResult Index()
+        public ActionResult Index(DateTime? start, DateTime? end)
         {
+            if(start==null)
+            {
+                start = DateTime.Today.AddDays(-1);
+            }
+            if(end==null)
+            {
+                end = DateTime.Today;
+            }
             if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
             {
                 var adminschedulelist = _context.Schedule
@@ -26,6 +34,7 @@ namespace Rehau_TMS.Controllers
                     .Include(s => s.Article)
                     .Include(s => s.Tool)
                     .Include(s => s.WorkType)
+                    .Where(s=>s.Date>=start && s.Date<=end)
                     .ToList()
                     .OrderByDescending(o => o.Id);
 
