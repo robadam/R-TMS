@@ -21,7 +21,7 @@ namespace Rehau_TMS.Controllers
         {
             if(start==null)
             {
-                start = DateTime.Today.AddDays(-1);
+                start = DateTime.Today.AddDays(-7);
             }
             if(end==null)
             {

@@ -22,6 +22,7 @@ namespace Rehau_TMS.Controllers
             var toolsList = _context.Tool
                 .Include(t => t.Articles)
                 .Include(t => t.ToolStatus)
+                .Where(t=>t.Id>0)
                 .ToList();
             return View(toolsList);
         }

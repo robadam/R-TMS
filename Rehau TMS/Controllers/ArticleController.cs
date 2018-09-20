@@ -33,7 +33,7 @@ namespace Rehau_TMS.Controllers
                                    Name = a.Name,
                                    ArticleSerialNumber = a.SerialNumber,
                                    Status = a.Status
-                               });
+                               }).Where(a=>a.Id>0);
             return View(articleList);
         }
 
