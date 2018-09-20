@@ -16,7 +16,7 @@ namespace Rehau_TMS.Controllers
     {
         ApplicationDbContext _context = new ApplicationDbContext();
 
-        // GET: Schedule
+        [HttpGet]
         public ActionResult Index(DateTime? start, DateTime? end)
         {
             if(start==null)
