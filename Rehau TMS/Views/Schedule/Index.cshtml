@@ -12,13 +12,29 @@
 
 @using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
 {
-    <div title="Payment Area" class="form">
-        <div class='input-group date' id='datetimepicker1'></div>
-            @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date", id = "start"})
+    <div class="form-inline">
+            @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date", id = "start" })
             @Html.TextBox("end", null, new { @class = "form-control datepicker", type = "date", id = "end" })
-        </div>
+@if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+{
+        <select class="form-control" name="user" id="user">
+            <option value="0">Wszyscy</option>               
+        </select>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.get("/Schedule/GetUserList", { user: $("#user").val() }, function (data) {
+                    $.each(data, function (index, row) {
+                        $("#user").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                    })
+                });
+            });
+        </script>
+}
 
-    <button class="btn btn-default" type="submit">Filtruj</button>
+           <button class="btn btn-default" type="submit">Filtruj</button>
+     </div>
+     <br />
 }
 
 

@@ -17,7 +17,7 @@ namespace Rehau_TMS.Controllers
         ApplicationDbContext _context = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index(DateTime? start, DateTime? end)
+        public ActionResult Index(DateTime? start, DateTime? end, string user)
         {
             if (start == null)
             {
@@ -29,7 +29,9 @@ namespace Rehau_TMS.Controllers
             }
             if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
             {
-                var adminschedulelist = _context.Schedule
+                if (user == "0" || user == null)
+                {
+                    var adminschedulelistdefault = _context.Schedule
                     .Include(s => s.ApplicationUser)
                     .Include(s => s.Article)
                     .Include(s => s.Tool)
@@ -37,8 +39,20 @@ namespace Rehau_TMS.Controllers
                     .Where(s => s.Date >= start && s.Date <= end)
                     .ToList()
                     .OrderByDescending(o => o.Id);
-
-                return View(adminschedulelist);
+                    return View(adminschedulelistdefault);
+                }
+                else
+                {
+                    var adminschedulelist = _context.Schedule
+                        .Include(s => s.ApplicationUser)
+                        .Include(s => s.Article)
+                        .Include(s => s.Tool)
+                        .Include(s => s.WorkType)
+                        .Where(s => s.Date >= start && s.Date <= end && s.ApplicationUserId == user)
+                        .ToList()
+                        .OrderByDescending(o => o.Id);
+                    return View(adminschedulelist);
+                }
             };
 
             string curruser = User.Identity.GetUserId();
@@ -47,6 +61,7 @@ namespace Rehau_TMS.Controllers
                 .Include(s => s.Article)
                 .Include(s => s.Tool)
                 .Include(s => s.WorkType)
+                .Where(s => s.Date >= start && s.Date <= end)
                 .ToList()
                 .OrderByDescending(o => o.Id);
 
@@ -167,6 +182,19 @@ namespace Rehau_TMS.Controllers
             o.Name = "--Wybierz podopcjê--";
             OptionsAdditionalsList.Insert(0, o);
             return Json(OptionsAdditionalsList, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetUserList()
+        {
+            _context.Configuration.ProxyCreationEnabled = false;
+            List<ApplicationUser> Users = _context.Users.ToList();
+            return Json(Users, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Report()
+        {
+
+            return View();
         }
     }
 }
