@@ -19,11 +19,11 @@ namespace Rehau_TMS.Controllers
         [HttpGet]
         public ActionResult Index(DateTime? start, DateTime? end)
         {
-            if(start==null)
+            if (start == null)
             {
                 start = DateTime.Today.AddDays(-7);
             }
-            if(end==null)
+            if (end == null)
             {
                 end = DateTime.Today;
             }
@@ -34,7 +34,7 @@ namespace Rehau_TMS.Controllers
                     .Include(s => s.Article)
                     .Include(s => s.Tool)
                     .Include(s => s.WorkType)
-                    .Where(s=>s.Date>=start && s.Date<=end)
+                    .Where(s => s.Date >= start && s.Date <= end)
                     .ToList()
                     .OrderByDescending(o => o.Id);
 
@@ -87,7 +87,7 @@ namespace Rehau_TMS.Controllers
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Edit(int? Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return HttpNotFound();
             }

@@ -12,8 +12,12 @@
 
 @using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
 {
-    @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date", id = "start", @value = DateTime.Now.ToShortDateString() })
-    @Html.TextBox("end", null, new { @class = "form-control datepicker", type = "date", id="end"})
+    <div title="Payment Area" class="form">
+        <div class='input-group date' id='datetimepicker1'></div>
+            @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date", id = "start"})
+            @Html.TextBox("end", null, new { @class = "form-control datepicker", type = "date", id = "end" })
+        </div>
+
     <button class="btn btn-default" type="submit">Filtruj</button>
 }
 
