@@ -9,7 +9,7 @@
             <a class="navbar-brand" rel="Schedule" href="@Url.Action("Index", "Schedule")" title="Rehau TMS">
                 <img style="max-width:90px; margin-top: -10px;" src="~/Content/Images/2000pxRehauLogo.png">
             </a>
-            @Html.ActionLink("Rehau TMS", "Index", "Schedule", new { area = "" }, new { @class = "navbar-brand" })
+            @*@Html.ActionLink("Rehau TMS", "Index", "Schedule", new { area = "" }, new { @class = "navbar-brand" })*@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -21,6 +21,7 @@
                     {
                         <li>@Html.ActionLink("Artykuły", "Index", "Article")</li>
                         <li>@Html.ActionLink("Narzędzia", "Index", "Tool")</li>
+                        <li>@Html.ActionLink("Raporty", "Index", "Report")</li>
                         <li>@Html.ActionLink("Użytkownicy", "Index", "Account")</li>
                     }
                 }
