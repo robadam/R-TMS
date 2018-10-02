@@ -22,6 +22,12 @@
                 <td>@item.Sum(s => s.ReportedHours)</td>
             </tr>
         }
-
     </tbody>
+
+    <tfoot>
+        <tr>
+            <td>Suma</td>
+            <td>@Model.Schedules.Sum(s => s.ReportedHours)</td>
+        </tr>
+    </tfoot>
 </table>
