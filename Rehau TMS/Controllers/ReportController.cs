@@ -17,7 +17,14 @@ namespace Rehau_TMS.Controllers
         // GET: Report
         public ActionResult Index()
         {
-            return View();
+            var worktypereport = _context.Schedule.Where(s => s.WorkType != null).ToList();
+
+            var viewModel = new RepWorkTypeViewModel
+            {
+                Schedules = worktypereport
+            };
+
+            return View(viewModel);
         }
     }
 }

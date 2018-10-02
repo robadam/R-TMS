@@ -1,6 +1,27 @@
-﻿
+﻿@model Rehau_TMS.ViewModels.RepWorkTypeViewModel
 @{
     ViewBag.Title = "Raport";
 }
 
 <h2>Raporty</h2>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+        <tr>
+            <td>Werkzeugmacher</td>
+            <td>(h)</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model.Schedules.GroupBy(s => new { s.WorkType}))
+        {
+            <tr>
+                <td>@item.Key.WorkType.Name</td>
+                <td>@item.Sum(s => s.ReportedHours)</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
