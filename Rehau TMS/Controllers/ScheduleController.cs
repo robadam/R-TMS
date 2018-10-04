@@ -16,16 +16,15 @@ namespace Rehau_TMS.Controllers
     {
         ApplicationDbContext _context = new ApplicationDbContext();
 
-        [HttpGet]
-        public ActionResult Index(DateTime? start, DateTime? end, string user)
+        public ActionResult Index(DateTime? startDate, DateTime? endDate, string user)
         {
-            if (start == null)
+            if (startDate == null)
             {
-                start = DateTime.Today.AddDays(-7);
+                startDate = DateTime.Today.AddDays(-7);
             }
-            if (end == null)
+            if (endDate == null)
             {
-                end = DateTime.Today;
+                endDate = DateTime.Today;
             }
             if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
             {
@@ -36,7 +35,7 @@ namespace Rehau_TMS.Controllers
                     .Include(s => s.Article)
                     .Include(s => s.Tool)
                     .Include(s => s.WorkType)
-                    .Where(s => s.Date >= start && s.Date <= end)
+                    .Where(s => s.Date >= startDate && s.Date <= endDate)
                     .ToList()
                     .OrderByDescending(o => o.Id);
                     return View(adminschedulelistdefault);
@@ -48,7 +47,7 @@ namespace Rehau_TMS.Controllers
                         .Include(s => s.Article)
                         .Include(s => s.Tool)
                         .Include(s => s.WorkType)
-                        .Where(s => s.Date >= start && s.Date <= end && s.ApplicationUserId == user)
+                        .Where(s => s.Date >= startDate && s.Date <= endDate && s.ApplicationUserId == user)
                         .ToList()
                         .OrderByDescending(o => o.Id);
                     return View(adminschedulelist);
@@ -61,7 +60,7 @@ namespace Rehau_TMS.Controllers
                 .Include(s => s.Article)
                 .Include(s => s.Tool)
                 .Include(s => s.WorkType)
-                .Where(s => s.Date >= start && s.Date <= end)
+                .Where(s => s.Date >= startDate && s.Date <= endDate)
                 .ToList()
                 .OrderByDescending(o => o.Id);
 
@@ -187,7 +186,7 @@ namespace Rehau_TMS.Controllers
         public JsonResult GetUserList()
         {
             _context.Configuration.ProxyCreationEnabled = false;
-            List<ApplicationUser> Users = _context.Users.ToList();
+            List<ApplicationUser> Users = _context.Users.Where(u => u.Name != "Admin").ToList();
             return Json(Users, JsonRequestBehavior.AllowGet);
         }
 

@@ -13,9 +13,9 @@
 @using (Html.BeginForm("Index", "Schedule", FormMethod.Get))
 {
     <div class="form-inline">
-            @Html.TextBox("start", null, new { @class = "form-control datepicker", type = "date", id = "start" })
-            @Html.TextBox("end", null, new { @class = "form-control datepicker", type = "date", id = "end" })
-@if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            @Html.TextBox("startDate", DateTime.Today.AddDays(-7).ToShortDateString(), new { @class = "form-control datepicker", type = "date", id = "start" })
+            @Html.TextBox("endDate", DateTime.Today.ToShortDateString(), new { @class = "form-control datepicker", type = "date", id = "end" })
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
 {
         <select class="form-control" name="user" id="user">
             <option value="0">Wszyscy</option>               
@@ -25,7 +25,7 @@
             $(document).ready(function () {
                 $.get("/Schedule/GetUserList", { user: $("#user").val() }, function (data) {
                     $.each(data, function (index, row) {
-                        $("#user").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                        $("#user").append("<option value='" + row.Id + "'>" + row.FullName + "</option>")
                     })
                 });
             });
