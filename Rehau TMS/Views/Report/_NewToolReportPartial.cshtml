@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Raport docieranych narzędzi";
 }
-@if (!Model.Schedules.Any())
+@if (!Model.Schedules.Where(s => s.ToolId != null && s.Tool.ToolStatusId == 1 && s.OptionsId == 1).Any())
 {
     <p><b>@ViewBag.Title</b></p>
     <p>Brak danych dla wskazanego zakresu</p>
