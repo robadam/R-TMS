@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Rehau_TMS.ViewModels
 {
-    public class RepWorkTypeViewModel
+    public class ReportsViewModel
     {
         public IEnumerable<Schedule> Schedules { get; set; }
+        public string EmptyModelMessage { get; set; }
     }
 }

@@ -15,11 +15,24 @@ namespace Rehau_TMS.Controllers
         ApplicationDbContext _context = new ApplicationDbContext();
 
         // GET: Report
-        public ActionResult Index()
+        public ActionResult Index(DateTime? startDate, DateTime? endDate)
         {
-            var worktypereport = _context.Schedule.Where(s => s.WorkType != null).ToList();
+            if (startDate == null || endDate == null)
+            {
+                string msg = "Wybierz zakres danych";
+                var emptyViewModel = new ReportsViewModel
+                {
+                    EmptyModelMessage = msg
+                };
+                return View(emptyViewModel);
+            }
 
-            var viewModel = new RepWorkTypeViewModel
+            //Declare reports here
+            var worktypereport = _context.Schedule.Where(s => s.WorkType != null && s.Date >= startDate && s.Date <= endDate).ToList();
+
+
+            //Assign reports data here
+            var viewModel = new ReportsViewModel
             {
                 Schedules = worktypereport
             };
