@@ -42,7 +42,7 @@ namespace Rehau_TMS.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DatabaseContextM", throwIfV1Schema: false)
+            : base("DatabaseContext", throwIfV1Schema: false)
         {
         }
 

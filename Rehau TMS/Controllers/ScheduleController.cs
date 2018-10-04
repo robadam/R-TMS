@@ -189,11 +189,5 @@ namespace Rehau_TMS.Controllers
             List<ApplicationUser> Users = _context.Users.Where(u => u.Name != "Admin").ToList();
             return Json(Users, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult Report()
-        {
-
-            return View();
-        }
     }
 }
