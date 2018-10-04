@@ -19,37 +19,8 @@
 {
     <p>@Model.EmptyModelMessage</p>
 }
-else if (!Model.Schedules.Any())
-{
-    <p>Brak danych dla wskazanego zakresu</p>
-}
 else
 {
-    <p><b>Raport rodzajów pracy</b></p>
-    <table class="table table-bordered table-hover">
-
-        <thead>
-            <tr>
-                <td><b>Werkzeugmacher</b></td>
-                <td><b>(h)</b></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.Schedules.GroupBy(s => new { s.WorkType }))
-            {
-                <tr>
-                    <td>@item.Key.WorkType.Name</td>
-                    <td>@item.Sum(s => s.ReportedHours)</td>
-                </tr>
-            }
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <td>Suma</td>
-                <td>@Model.Schedules.Sum(s => s.ReportedHours)</td>
-            </tr>
-        </tfoot>
-    </table>
+    @Html.Partial("_WorkTypeReportPartial")
 }
+

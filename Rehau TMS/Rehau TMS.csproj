@@ -478,6 +478,7 @@
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\_WorkTypeReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
