@@ -23,7 +23,8 @@ else
         <tbody>
             @foreach (var item in Model.Schedules
                 .Where(s => s.ToolId != null &&s.Tool.ToolStatusId == 1 && s.OptionsId == 1)
-                .GroupBy(s => new { s.Tool, s.Article}))
+                .GroupBy(s => new { s.Tool, s.Article})
+                .OrderBy(s => s.Key.Tool.SerialNumber).ThenBy(s => s.Key.Article.ArticleSerialNumber))
             {
                 <tr>
                     <td>@item.Key.Tool.SerialNumber</td>

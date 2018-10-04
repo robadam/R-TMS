@@ -22,7 +22,9 @@ else
         </thead>
 
         <tbody>
-            @foreach (var item in Model.Schedules.GroupBy(s => new { s.ApplicationUser, s.WorkType, s.Tool, s.ToolId }))
+            @foreach (var item in Model.Schedules
+                .GroupBy(s => new { s.ApplicationUser, s.WorkType, s.Tool, s.ToolId })
+                .OrderBy(s => s.Key.ApplicationUser.FullName).ThenBy(s => s.Key.WorkType.Name).ThenBy(s => s.Key.ToolId))
             {
                 <tr>
                     <td>@item.Key.ApplicationUser.FullName</td>
