@@ -10,6 +10,6 @@ namespace Rehau_TMS.ViewModels
     public class ReportsViewModel
     {
         public IEnumerable<Schedule> Schedules { get; set; }
-        public string EmptyModelMessage { get; set; }
+        public bool ModelControl { get; set; }
     }
 }

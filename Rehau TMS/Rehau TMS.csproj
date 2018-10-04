@@ -479,6 +479,8 @@
     <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\_WorkTypeReportPartial.cshtml" />
+    <Content Include="Views\Report\_WorkerTimeReportPartial.cshtml" />
+    <Content Include="Views\Report\_NewToolReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

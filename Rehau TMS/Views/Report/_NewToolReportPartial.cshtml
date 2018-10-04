@@ -1,0 +1,37 @@
+﻿@model Rehau_TMS.ViewModels.ReportsViewModel
+@{
+    ViewBag.Title = "Raport docieranych narzędzi";
+}
+@if (!Model.Schedules.Any())
+{
+    <p><b>@ViewBag.Title</b></p>
+    <p>Brak danych dla wskazanego zakresu</p>
+}
+else
+{
+    <p><b>@ViewBag.Title</b></p>
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <td><b>Numer WA</b></td>
+                <td><b>Artykuł</b></td>
+                <td><b>(h)</b></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Schedules
+                .Where(s => s.ToolId != null &&s.Tool.ToolStatusId == 1 && s.OptionsId == 1)
+                .GroupBy(s => new { s.Tool, s.Article}))
+            {
+                <tr>
+                    <td>@item.Key.Tool.SerialNumber</td>
+                    <td>@item.Key.Article.ArticleSerialNumber</td>
+                    <td>@item.Sum(s => s.ReportedHours)</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

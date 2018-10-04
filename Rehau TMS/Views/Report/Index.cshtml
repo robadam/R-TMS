@@ -15,12 +15,18 @@
     </div>
     <br />
 }
-@if (Model.Schedules == null)
+@if (Model.ModelControl == false)
 {
-    <p>@Model.EmptyModelMessage</p>
+    <p>Wybierz zakres danych</p>
+}
+else if (!Model.Schedules.Any())
+{
+    <p>Brak danych dla wskazanego zakresu</p>
 }
 else
 {
     @Html.Partial("_WorkTypeReportPartial")
+    @Html.Partial("_WorkerTimeReportPartial")
+    @Html.Partial("_NewToolReportPartial")
 }
 

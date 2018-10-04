@@ -19,25 +19,23 @@ namespace Rehau_TMS.Controllers
         {
             if (startDate == null || endDate == null)
             {
-                string msg = "Wybierz zakres danych";
                 var emptyViewModel = new ReportsViewModel
                 {
-                    EmptyModelMessage = msg
+                    ModelControl = false
                 };
                 return View(emptyViewModel);
             }
-
-            //Declare reports here
-            var worktypereport = _context.Schedule.Where(s => s.WorkType != null && s.Date >= startDate && s.Date <= endDate).ToList();
-
-
-            //Assign reports data here
-            var viewModel = new ReportsViewModel
+            else
             {
-                Schedules = worktypereport
-            };
+                var schedules = _context.Schedule.Where(s => s.Date >= startDate && s.Date <= endDate).ToList();
+                var viewModel = new ReportsViewModel
+                {
+                    ModelControl = true,
+                    Schedules = schedules
+                };
 
-            return View(viewModel);
+                return View(viewModel);
+            }
         }
     }
 }
