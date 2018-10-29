@@ -2,16 +2,20 @@
 @{
     ViewBag.Title = "Raport";
 }
-
 <h2>Raporty</h2>
 <br />
 @using (Html.BeginForm("Index", "Report", FormMethod.Get))
 {
     <div class="form-inline">
-        @Html.TextBox("startDate", DateTime.Today.ToShortDateString(), new { @class = "form-control datepicker", type = "date", required = "required"})
+        @Html.TextBox("startDate", DateTime.Today.ToShortDateString(), new { @class = "form-control datepicker", type = "date", required = "required" })
         @Html.TextBox("endDate", DateTime.Today.ToShortDateString(), new { @class = "form-control datepicker", type = "date", required = "required" })
 
         <button class="btn btn-default" type="submit">Generuj dane</button>
+
+        @if (Model.ModelControl == true && Model.Schedules.Any())
+        {
+            <button class="btn btn-default" type="submit" id="btnExport" name="btnExport">Pobierz dane</button>
+        }
     </div>
     <br />
 }
@@ -25,8 +29,42 @@ else if (!Model.Schedules.Any())
 }
 else
 {
-    @Html.Partial("_WorkTypeReportPartial")
-    @Html.Partial("_WorkerTimeReportPartial")
-    @Html.Partial("_NewToolReportPartial")
+    <div id="divExport">
+        <meta http-equiv="content-type" content="application/vnd.ms-excel;" charset="UTF-8">
+
+        @Html.Partial("_WorkTypeReportPartial")
+        @Html.Partial("_WorkerTimeReportPartial")
+        @Html.Partial("_NewToolReportPartial")
+    </div>
 }
 
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#btnExport").click(function (e) {
+                //getting values of current time for generating the file name
+                var dt = new Date();
+                var day = dt.getDate();
+                var month = dt.getMonth() + 1;
+                var year = dt.getFullYear();
+                var hour = dt.getHours();
+                var mins = dt.getMinutes();
+                var postfix = year + "-" + month + "-" + day + "_" + hour + mins;
+                //creating a temporary HTML link element (they support setting file names)
+                var a = document.createElement('a');
+                //getting data from our div that contains the HTML table
+                var data_type = 'data:application/vnd.ms-excel';
+                var table_div = document.getElementById('divExport');
+                var table_html = table_div.outerHTML.replace(/ /g, '%20');
+                a.href = data_type + ', ' + table_html;
+                //setting the file name
+                a.download = 'Raport_' + postfix + '.xls';
+                //triggering the function
+                a.click();
+                //just in case, prevent default behaviour
+                e.preventDefault();
+            });
+        });
+    </script>
+}
