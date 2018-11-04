@@ -1,7 +1,7 @@
 ﻿@model Rehau_TMS.ViewModels.ReportsViewModel
 @if (!Model.Schedules.Any())
 {
-    <p><b>Raport rodzajów pracy</b></p>
+    <p><b>Raport rodzajów pracy [Werkzeugmacher]</b></p>
     <p>Brak danych dla wskazanego zakresu</p>
 }
 else
@@ -18,7 +18,7 @@ else
 
         <tbody>
             @foreach (var item in Model.Schedules
-                .GroupBy(s => new { s.WorkType })
+                .GroupBy(s => new { s.WorkType, })
                 .OrderBy(s => s.Key.WorkType.Name))
             {
                 <tr>

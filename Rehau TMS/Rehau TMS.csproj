@@ -481,6 +481,9 @@
     <Content Include="Views\Report\_WorkTypeReportPartial.cshtml" />
     <Content Include="Views\Report\_WorkerTimeReportPartial.cshtml" />
     <Content Include="Views\Report\_NewToolReportPartial.cshtml" />
+    <Content Include="Views\Report\_WorkshopWorkTimePartial.cshtml" />
+    <Content Include="Views\Report\_EcomilReportPartial.cshtml" />
+    <Content Include="Views\Report\_ELBReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
